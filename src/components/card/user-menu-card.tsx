@@ -7,6 +7,8 @@ import { CiLogout } from "react-icons/ci";
 import { RiMessage2Line } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 import { Card } from "../ui/card";
+import { useDispatch } from "react-redux";
+import { logout } from "@/features/authSlice";
 
 const UserMenuCard = ({
   showMenu,
@@ -84,9 +86,12 @@ const UserMenuAction = ({
   link?: any;
   handler: Function;
 }) => {
+  const dispatch = useDispatch();
+
   const butonHandler = (e: any) => {
     if (isButton) e.preventDefault();
     if (handler) handler(e);
+    dispatch(logout());
   };
   if (!isButton)
     return (

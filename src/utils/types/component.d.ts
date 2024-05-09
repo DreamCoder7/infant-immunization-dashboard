@@ -192,3 +192,9 @@ export type HealthProfessionalProp = {
 };
 
 type Gender = "male" | "female";
+
+export type AuthState = {
+  isAuthenticated: boolean;
+  user: UserModel | null;
+  accessToken: string | null;
+};
