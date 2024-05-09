@@ -7,8 +7,8 @@ import { CiLogout } from "react-icons/ci";
 import { RiMessage2Line } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 import { Card } from "../ui/card";
-import { useDispatch } from "react-redux";
-import { logout } from "@/features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectCurrentUser } from "@/features/authSlice";
 
 const UserMenuCard = ({
   showMenu,
@@ -17,12 +17,16 @@ const UserMenuCard = ({
   showMenu: boolean;
   setShowMenu: Function;
 }) => {
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+
   const hideUserMenu = () => {
     setShowMenu(false);
   };
 
   const handleLogout = () => {
     hideUserMenu();
+    dispatch(logout());
   };
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const UserMenuCard = ({
           </div>
           <div className="">
             <p className="text-nowrap font-semibold capitalize">
-              {"natnael"} {"deyas"}
+              {currentUser?.firstName} {currentUser?.lastName}
             </p>
             <p className="text-sm text-foreground/80  text-left"> {"Admin"} </p>
           </div>
